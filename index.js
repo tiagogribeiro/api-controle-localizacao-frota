@@ -3,9 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('./src/infrastructure/mongo/connector');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./src/infrastructure/routes/index');
+var usersRouter = require('./src/infrastructure/routes/users');
+var equipamentosRouter = require('./src/infrastructure/routes/equipamento');
+var localizacaoRouter = require('./src/infrastructure/routes/localizacao');
+var obraRouter = require('./src/infrastructure/routes/obra');
 
 var app = express();
 
@@ -21,6 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/equipamentos', equipamentosRouter);
+app.use('/localizacoes', localizacaoRouter);
+app.use('/obras', obraRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,3 +46,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+
